@@ -1,0 +1,15 @@
+﻿<Window x:Class="StockWpf.HistoryWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:StockWpf"
+        mc:Ignorable="d"
+        Title="HistoryWindow" Height="300" Width="300">
+    <Grid>
+        <ScrollViewer x:Name="historyScrollViewer" HorizontalAlignment="Left" Height="224" Margin="10,10,0,0" VerticalAlignment="Top" Width="272">
+            <ListBox x:Name="historyListBox" Height="212" Width="235"/>
+        </ScrollViewer>
+        <Button Content="Назад" HorizontalAlignment="Left" Margin="207,239,0,0" VerticalAlignment="Top" Width="75"/>
+    </Grid>
+</Window>
