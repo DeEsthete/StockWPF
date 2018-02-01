@@ -45,56 +45,65 @@ namespace StockWpf
 
         private void FinishButtonClick(object sender, RoutedEventArgs e)
         {
+            bool isFound = false;
             if (operationComboBox.SelectedIndex == 0)
             {
+                int  countTemp = 0;
+                try
+                {
+                    int.TryParse(countTextBox.Text, out countTemp);
+                }
+                catch
+                {
+                    MessageBox.Show("Поле 'Кол-во' должно содержать только цифры");
+                }
                 for (int i = 0; i < items.Count; i++)
                 {
-                    int countTemp = 0;
                     if (items[i].Name == nameItemTextBox.Text)
                     {
-                        try
-                        {
-                            int.TryParse(countTextBox.Text, out countTemp);
-                        }
-                        catch
-                        {
-                            MessageBox.Show("Поле 'Кол-во' должно содержать только цифры");
-                        }
                         items[i].Count += countTemp;
                         ItemForHistory temp = new ItemForHistory(items[i], DateTime.Now, countTemp);
                         itemForHistory.Add(temp);
+                        isFound = true;
                     }
-                    else
-                    {
-                        Item temp = new Item(Guid.NewGuid(), nameItemTextBox.Text, countTemp);
-                        items.Add(temp);
-                    }
+                }
+                if (isFound == false)
+                {
+                    
+                    Item temp = new Item(Guid.NewGuid(), nameItemTextBox.Text, countTemp);
+                    ItemForHistory tempHistory = new ItemForHistory(temp, DateTime.Now, countTemp);
+                    itemForHistory.Add(tempHistory);
+                    items.Add(temp);
                 }
             }
             else if (operationComboBox.SelectedIndex == 1)
             {
+                int countTemp = 0;
+                try
+                {
+                    int.TryParse(countTextBox.Text, out countTemp);
+                }
+                catch
+                {
+                    MessageBox.Show("Поле 'Кол-во' должно содержать только цифры");
+                }
                 for (int i = 0; i < items.Count; i++)
                 {
-                    int countTemp = 0;
                     if (items[i].Name == nameItemTextBox.Text)
                     {
-                        try
-                        {
-                            int.TryParse(countTextBox.Text, out countTemp);
-                        }
-                        catch
-                        {
-                            MessageBox.Show("Поле 'Кол-во' должно содержать только цифры");
-                        }
+                        
                         items[i].Count -= countTemp;
                         ItemForHistory temp = new ItemForHistory(items[i], DateTime.Now, (countTemp - (countTemp *2)));
                         itemForHistory.Add(temp);
+                        isFound = true;
                     }
-                    else
-                    {
-                        Item temp = new Item(Guid.NewGuid(), nameItemTextBox.Text, (countTemp - (countTemp * 2)));
-                        items.Add(temp);
-                    }
+                }
+                if (isFound == false)
+                {
+                    Item temp = new Item(Guid.NewGuid(), nameItemTextBox.Text, (countTemp - (countTemp * 2)));
+                    ItemForHistory tempHistory = new ItemForHistory(temp, DateTime.Now, (countTemp - (countTemp * 2)));
+                    itemForHistory.Add(tempHistory);
+                    items.Add(temp);
                 }
             }
             operationWindow.Close();

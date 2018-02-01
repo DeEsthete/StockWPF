@@ -26,7 +26,7 @@ namespace StockWpf
 
         public override string ToString()
         {
-            return (Item.Name + " " + ChangeInQuantity + " " + " - " + Date);
+            return ("Наименование: " + Item.Name + "\nКоличество: " + ChangeInQuantity + "\nВремя: " + Date);
         }
     }
 }
